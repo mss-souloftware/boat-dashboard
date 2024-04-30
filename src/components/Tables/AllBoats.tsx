@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Product } from "@/types/product";
 
 const productData: Product[] = [
@@ -7,7 +6,7 @@ const productData: Product[] = [
     name: "Boat Name = 1",
     from: "Abu Dhabi",
     to: "Sharjah",
-    capacity: "43",
+    capacity: "45",
     captain: "Jhon Doe",
   },
   {
@@ -34,14 +33,38 @@ const productData: Product[] = [
     capacity: "23",
     captain: "Jhon Doe",
   },
+  {
+    number: "#VG6643",
+    name: "Boat Name = 5",
+    from: "-",
+    to: "-",
+    capacity: "0",
+    captain: "-",
+  },
+  {
+    number: "#TS097",
+    name: "Boat Name = 6",
+    from: "-",
+    to: "-",
+    capacity: "0",
+    captain: "-",
+  },
+  {
+    number: "#XQ4583",
+    name: "Boat Name = 7",
+    from: "-",
+    to: "-",
+    capacity: "0",
+    captain: "-",
+  },
 ];
 
-const TableTwo = () => {
+const AllBoats = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="px-4 py-6 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Recent Boat Updates
+          All Boats
         </h4>
       </div>
 
@@ -104,4 +127,4 @@ const TableTwo = () => {
   );
 };
 
-export default TableTwo;
+export default AllBoats;
