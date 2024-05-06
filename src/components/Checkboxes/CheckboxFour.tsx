@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CheckboxFour = ({ title }) => {
+const CheckboxFour = ({ title }: { title: string }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return (

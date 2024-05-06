@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import { useEffect } from "react";
 
-const DatePickerOne = ({ title }) => {
+const DatePickerOne = ({ title }: { title: string }) => {
   useEffect(() => {
     // Init flatpickr
     flatpickr(".form-datepicker", {

@@ -88,8 +88,8 @@ const FormElements = () => {
               </h3>
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
-              <DatePickerOne />
-              <DatePickerTwo />
+              <DatePickerOne title="Date"/>
+              <DatePickerTwo/>
             </div>
           </div>
 
@@ -180,7 +180,7 @@ const FormElements = () => {
               <CheckboxOne />
               <CheckboxTwo />
               <CheckboxThree />
-              <CheckboxFour />
+              <CheckboxFour title="Date"/>
               <CheckboxFive />
             </div>
           </div>
