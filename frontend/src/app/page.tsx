@@ -1,13 +1,48 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Login - Boat Dashboard",
-};
+import { useState } from 'react';
+
+// export const metadata: Metadata = {
+//   title: "Login - Boat Dashboard",
+// };
 
 const SignIn: React.FC = () => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        // Redirect to dashboard or another page
+        window.location.href = '/dashboard';
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('An error occurred while logging in');
+    }
+  };
+
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex flex-wrap items-center">
@@ -159,8 +194,8 @@ const SignIn: React.FC = () => {
             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
               Sign In
             </h2>
-
-            <form action="/dashboard">
+            {error && <div>{error}</div>}
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Email
@@ -170,7 +205,7 @@ const SignIn: React.FC = () => {
                     type="email"
                     placeholder="Enter your email"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    value="test@mail.com"
+                    value={username} onChange={(e) => setUsername(e.target.value)}
                   />
 
                   <span className="absolute right-4 top-4">
@@ -202,7 +237,7 @@ const SignIn: React.FC = () => {
                     type="password"
                     placeholder="6+ Characters, 1 Capital letter"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    value="123456789"
+                    value={password} onChange={(e) => setPassword(e.target.value)}
                   />
 
                   <span className="absolute right-4 top-4">

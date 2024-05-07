@@ -42,6 +42,12 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Ignore backend node_modules directory
+backend/node_modules/
+
+# Ignore frontend node_modules directory
+frontend/node_modules/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -83,9 +89,26 @@ web_modules/
 .cache
 .parcel-cache
 
+# Ignore backend node_modules directory
+backend/node_modules/.cache
+backend/node_modules/.parcel-cache
+
+# Ignore frontend node_modules directory
+frontend/node_modules/.cache
+frontend/node_modules/.parcel-cache
+
+
 # Next.js build output
 .next
 out
+
+# Ignore backend node_modules directory
+backend/node_modules/.next
+backend/node_modules/.out
+
+# Ignore frontend node_modules directory
+frontend/node_modules/.next
+frontend/node_modules/.out
 
 # Nuxt.js build / generate output
 .nuxt
