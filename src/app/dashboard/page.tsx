@@ -3,6 +3,7 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import CardDataStats from "../../components/CardDataStats";
 import TableTwo from "@/components/Tables/TableTwo";
 
+
 export const metadata: Metadata = {
   title:
     "Dashbaord - Boat Dashboard",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+
       <DefaultLayout>
         <div className="grid grid-cols-2 gap-4">
           <CardDataStats title="Total Boats" total="276" rate="">
@@ -23,6 +25,7 @@ export default function Home() {
         <div className="mt-5"></div>
         <TableTwo />
       </DefaultLayout>
+
     </>
   );
 }
