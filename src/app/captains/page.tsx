@@ -81,11 +81,11 @@ export default function Home() {
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
-                    <p className="font-medium text-black">{captain.email}</p>
+                    <p className="font-medium text-black dark:text-white sm:block">{captain.email}</p>
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
-                    <p className="font-medium text-black">{captain.country}</p>
+                    <p className="font-medium text-black dark:text-white sm:block">{captain.country}</p>
                   </div>
 
                   <div className="col-span-1 flex justify-center items-center">
