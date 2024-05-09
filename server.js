@@ -52,3 +52,35 @@ app.post('/logout', (req, res) => {
     // You can optionally perform additional cleanup or invalidation tasks here
     res.json({ message: 'Logout successful' });
 });
+
+const Captain = mongoose.model('Captain', {
+    name: String,
+    phone: String,
+    email: String,
+    country: String,
+});
+
+// Route to add captain
+app.post('/addCaptain', async (req, res) => {
+    try {
+        const { name, phone, email, country } = req.body;
+        const newCaptain = new Captain({ name, phone, email, country });
+        await newCaptain.save();
+        res.json({ message: 'Captain added successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to add captain' });
+    }
+});
+
+const CaptainData = mongoose.model('Captain');
+
+// Endpoint to get all captains
+app.get('/captains', async (req, res) => {
+    try {
+        const captains = await CaptainData.find();
+        res.json(captains);
+    } catch (error) {
+        console.error('Error fetching captains:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});

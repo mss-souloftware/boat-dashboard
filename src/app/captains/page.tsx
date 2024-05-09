@@ -1,44 +1,32 @@
-import { Metadata } from "next";
+"use client"
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import Image from "next/image";
-import { BRAND } from "@/types/brand";
 
-export const metadata: Metadata = {
-  title:
-    "All Captains - Boat Dashboard",
-};
-
-
-const brandData: BRAND[] = [
-  {
-    logo: "/images/brand/brand-01.svg",
-    name: "John Doe",
-    visitors: "+1 2345 5678",
-    revenues: "test@gmail.com",
-  },
-  {
-    logo: "/images/brand/brand-02.svg",
-    name: "Robert S",
-    visitors: "+1 2345 5678",
-    revenues: "test@gmail.com",
-  },
-  {
-    logo: "/images/brand/brand-04.svg",
-    name: "Michel T",
-    visitors: "+1 2345 5678",
-    revenues: "test@gmail.com",
-  },
-  {
-    logo: "/images/brand/brand-05.svg",
-    name: "Tobias K",
-    visitors: "+1 2345 5678",
-    revenues: "test@gmail.com",
-  },
-];
-
-
+interface Captain {
+  name: string;
+  phone: string;
+  email: string;
+  country: string;
+}
 
 export default function Home() {
+
+  const [captains, setCaptains] = useState<Captain[]>([]);
+
+  useEffect(() => {
+    const fetchCaptains = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/captains');
+        setCaptains(response.data);
+      } catch (error) {
+        console.error('Error fetching captains:', error);
+      }
+    };
+    fetchCaptains();
+  }, []);
+
+
   return (
     <>
       <DefaultLayout>
@@ -47,10 +35,10 @@ export default function Home() {
         <div className="col-span-12 xl:col-span-7">
           <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div className="flex flex-col">
-              <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-4">
+              <div className="grid grid-cols-5 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
                 <div className="p-2.5 xl:p-4">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
-                    Profile
+                    Captain Name
                   </h5>
                 </div>
                 <div className="p-2.5 text-center xl:p-4">
@@ -63,6 +51,11 @@ export default function Home() {
                     Email
                   </h5>
                 </div>
+                <div className="p-2.5 text-center xl:p-4">
+                  <h5 className="text-sm font-medium uppercase xsm:text-base">
+                    City & Country
+                  </h5>
+                </div>
                 <div className="hidden p-2.5 text-center sm:block xl:p-4">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
                     Actions
@@ -70,31 +63,29 @@ export default function Home() {
                 </div>
               </div>
 
-              {brandData.map((brand, key) => (
+              {captains.map((captain, index) => (
                 <div
-                  className={`grid grid-cols-3 sm:grid-cols-4 ${key === brandData.length - 1
-                    ? ""
-                    : "border-b border-stroke dark:border-strokedark"
-                    }`}
-                  key={key}
+                  className={`grid grid-cols-3 sm:grid-cols-5 `}
+                  key={index}
                 >
                   <div className="flex items-center gap-3 p-2.5 xl:p-5">
-                    <div className="h-9 w-full max-w-9 flex-shrink-0">
-                      <Image src={brand.logo} width={60} height={50} alt="Brand" />
-                    </div>
                     <p className="hidden font-medium text-black dark:text-white sm:block">
-                      {brand.name}
+                      {captain.name}
                     </p>
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
                     <p className="font-medium text-black dark:text-white">
-                      {brand.visitors}
+                      {captain.phone}
                     </p>
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
-                    <p className="font-medium text-black">{brand.revenues}</p>
+                    <p className="font-medium text-black">{captain.email}</p>
+                  </div>
+
+                  <div className="flex items-center justify-center p-2.5 xl:p-5">
+                    <p className="font-medium text-black">{captain.country}</p>
                   </div>
 
                   <div className="col-span-1 flex justify-center items-center">
