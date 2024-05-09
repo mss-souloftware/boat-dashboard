@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const fetchCaptains = async () => {
       try {
-        const response = await axios.get('/captains');
+        const response = await axios.get('https://boat-server.vercel.app//captains');
         setCaptains(response.data);
       } catch (error) {
         console.error('Error fetching captains:', error);
